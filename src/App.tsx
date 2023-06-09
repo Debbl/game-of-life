@@ -1,82 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-
-export type TSize = 16 | 32 | 64;
+import { useGame } from "./hooks/useGame";
 
 function App() {
-  const [size, setSize] = useState<TSize>(16);
-  const [board, setBoard] = useState(
-    Array.from({ length: size * size }).fill(0) as (0 | 1)[]
-  );
-  const [isStarting, setIsStarting] = useState(false);
-  const intervalID = useRef<number>();
-  const handleClick = (i: number) => {
-    setBoard((prev) => {
-      const next = [...prev];
-      next[i] = 1;
-      return next;
-    });
-  };
-  const getAdjoinCount = (i: number, board: (0 | 1)[], size: TSize) => {
-    const adjoin = [
-      board[i - size - 1],
-      board[i - size],
-      board[i - size + 1],
-      board[i - 1],
-      board[i + 1],
-      board[i + size - 1],
-      board[i + size],
-      board[i + size + 1],
-    ];
-    let adjoinCount = 0;
-    for (let j = 0; j < adjoin.length; j++) {
-      if (
-        (j === 0 && i % size !== 0 && i >= size) ||
-        (j === 1 && i >= size) ||
-        (j === 2 && i % size !== size - 1 && i >= size) ||
-        (j === 3 && i % size !== 0) ||
-        (j === 4 && i % size !== size - 1) ||
-        (j === 5 && i % size !== 0 && i < size * (size - 1)) ||
-        (j === 6 && i < size * (size - 1)) ||
-        (j === 7 && i % size !== size - 1 && i < size * (size - 1))
-      ) {
-        adjoinCount += adjoin[j];
-      }
-    }
-
-    return adjoinCount;
-  };
-  const handleStart = () => {
-    intervalID.current = setInterval(() => {
-      setIsStarting(true);
-      setBoard((prevBoard) => {
-        const nextBoard = [...prevBoard];
-        prevBoard.forEach((b, i) => {
-          const count = getAdjoinCount(i, prevBoard, size);
-          if (b === 0 && count === 3) {
-            nextBoard[i] = 1;
-          } else if (b === 1 && (count < 2 || count > 3)) {
-            nextBoard[i] = 0;
-          }
-        });
-        return nextBoard;
-      });
-    }, 300);
-  };
-  const handleStop = () => {
-    setIsStarting(false);
-    intervalID.current && clearInterval(intervalID.current);
-  };
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = +e.target.value as any as TSize;
-    setSize(value);
-    setBoard(Array.from({ length: value * value }).fill(0) as (0 | 1)[]);
-    handleStop();
-  };
-  useEffect(() => {
-    return () => {
-      handleStop();
-    };
-  }, []);
+  const {
+    board,
+    size,
+    isStarting,
+    handleSelect,
+    handleStart,
+    handleStop,
+    handleClick,
+  } = useGame();
 
   return (
     <div>
