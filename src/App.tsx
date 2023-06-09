@@ -12,9 +12,9 @@ function App() {
   } = useGame();
 
   return (
-    <div>
+    <div className="py-6">
       <div className="flex justify-center">
-        <div className="flex gap-x-2 py-4 items-center">
+        <div className="flex gap-x-2 items-center">
           <button
             className="btn"
             onClick={() => handleStart()}
