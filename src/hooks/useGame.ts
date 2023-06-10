@@ -1,12 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import type { TBoard, TSize } from "../types";
 import { getAdjoinCount } from "../utils";
 import patterns from "../assets/patterns.json";
+import useLocalStorageState from "./useLocalStorageState";
 
-const useGame = () => {
-  const [size, setSize] = useState<TSize>(16);
-  const [board, setBoard] = useState(patterns["16"]["00"] as any as TBoard);
-  const [isStarting, setIsStarting] = useState(true);
+const initPattern = patterns["16"]["00"] as any as TBoard;
+
+function useGame() {
+  const [size, setSize] = useLocalStorageState<TSize>("size", 16);
+  const [board, setBoard] = useLocalStorageState(
+    "board",
+    initPattern as any as TBoard
+  );
+  const [isStarting, setIsStarting] = useLocalStorageState("isStarting", true);
   const intervalID = useRef<number>();
 
   const updateBoard = useCallback(() => {
@@ -22,7 +28,7 @@ const useGame = () => {
       });
       return nextBoard;
     });
-  }, [size]);
+  }, [setBoard, size]);
   const handleClick = (i: number) => {
     setBoard((prev) => {
       const next = [...prev];
@@ -47,6 +53,14 @@ const useGame = () => {
     handleStop();
     setBoard(Array.from({ length: size * size }).fill(0) as TBoard);
   };
+  const handleInit = () => {
+    if (size === 16) {
+      handleStop();
+      setBoard(initPattern as any as TBoard);
+    } else {
+      handleReset();
+    }
+  };
 
   useEffect(() => {
     if (isStarting) {
@@ -63,6 +77,7 @@ const useGame = () => {
     board,
     size,
     isStarting,
+    handleInit,
     updateBoard,
     handleClick,
     handleStart,
@@ -70,6 +85,6 @@ const useGame = () => {
     handleSelect,
     handleReset,
   };
-};
+}
 
 export { useGame };

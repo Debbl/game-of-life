@@ -1,5 +1,4 @@
 import Footer from "./components/Footer";
-import Frame from "./components/Frame";
 import { useGame } from "./hooks/useGame";
 
 function App() {
@@ -7,6 +6,7 @@ function App() {
     board,
     size,
     isStarting,
+    handleInit,
     updateBoard,
     handleSelect,
     handleStart,
@@ -35,6 +35,9 @@ function App() {
               disabled={isStarting}
             >
               next
+            </button>
+            <button className="btn" onClick={() => handleInit()}>
+              init
             </button>
             <label>
               size:
@@ -71,7 +74,7 @@ function App() {
         <Footer />
       </div>
 
-      <Frame />
+      {/* <Frame /> */}
     </div>
   );
 }
