@@ -18,18 +18,10 @@ function App() {
       <div className="flex justify-center">
         <div className="flex gap-x-2 items-center">
           <button
-            className="btn"
-            onClick={() => handleStart()}
-            disabled={isStarting}
+            className="btn w-16"
+            onClick={() => (isStarting ? handleStop() : handleStart())}
           >
-            start
-          </button>
-          <button
-            className="btn"
-            onClick={() => handleStop()}
-            disabled={!isStarting}
-          >
-            stop
+            {isStarting ? "stop" : "start"}
           </button>
           <button className="btn" onClick={() => handleReset()}>
             reset
