@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import { version } from "../../package.json";
+
+const _version = localStorage.getItem("version");
+if (_version !== version) {
+  localStorage.clear();
+  localStorage.setItem("version", version);
+}
 
 function useLocalStorageState<T>(key: string, defaultValue: T) {
   const _key = `game-of-life-${key}`;
