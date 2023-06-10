@@ -1,4 +1,5 @@
 import Footer from "./components/Footer";
+import Frame from "./components/Frame";
 import { useGame } from "./hooks/useGame";
 
 function App() {
@@ -74,7 +75,7 @@ function App() {
         <Footer />
       </div>
 
-      {/* <Frame /> */}
+      <Frame />
     </div>
   );
 }
