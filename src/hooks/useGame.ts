@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TBoard, TSize } from "../types";
 import { getAdjoinCount } from "../utils";
 
@@ -20,7 +20,7 @@ const useGame = () => {
   const [isStarting, setIsStarting] = useState(true);
   const intervalID = useRef<number>();
 
-  const updateBoard = () => {
+  const updateBoard = useCallback(() => {
     setBoard((prevBoard) => {
       const nextBoard = [...prevBoard];
       prevBoard.forEach((b, i) => {
@@ -33,8 +33,7 @@ const useGame = () => {
       });
       return nextBoard;
     });
-  };
-
+  }, [size]);
   const handleClick = (i: number) => {
     setBoard((prev) => {
       const next = [...prev];
@@ -45,11 +44,9 @@ const useGame = () => {
   };
   const handleStart = () => {
     setIsStarting(true);
-    intervalID.current = setInterval(updateBoard, 300);
   };
   const handleStop = () => {
     setIsStarting(false);
-    intervalID.current && clearInterval(intervalID.current);
   };
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = +e.target.value as any as TSize;
@@ -57,21 +54,32 @@ const useGame = () => {
     setBoard(Array.from({ length: value * value }).fill(0) as TBoard);
     handleStop();
   };
+  const handleReset = () => {
+    handleStop();
+    setBoard(Array.from({ length: size * size }).fill(0) as TBoard);
+  };
 
   useEffect(() => {
-    isStarting && handleStart();
+    if (isStarting) {
+      intervalID.current = setInterval(updateBoard, 300);
+    } else {
+      clearInterval(intervalID.current);
+    }
     return () => {
-      handleStop();
+      clearInterval(intervalID.current);
     };
-  }, []);
+  }, [isStarting, updateBoard]);
+
   return {
     board,
     size,
     isStarting,
+    updateBoard,
     handleClick,
     handleStart,
     handleStop,
     handleSelect,
+    handleReset,
   };
 };
 

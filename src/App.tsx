@@ -5,10 +5,12 @@ function App() {
     board,
     size,
     isStarting,
+    updateBoard,
     handleSelect,
     handleStart,
     handleStop,
     handleClick,
+    handleReset,
   } = useGame();
 
   return (
@@ -28,6 +30,16 @@ function App() {
             disabled={!isStarting}
           >
             stop
+          </button>
+          <button className="btn" onClick={() => handleReset()}>
+            reset
+          </button>
+          <button
+            className="btn"
+            onClick={() => updateBoard()}
+            disabled={isStarting}
+          >
+            next
           </button>
           <label>
             size:
