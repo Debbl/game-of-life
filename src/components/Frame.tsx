@@ -1,10 +1,10 @@
 function Frame() {
   return (
-    <div>
+    <div className="mx-auto mt-20 h-[36rem] w-[64rem] ">
       <iframe
         src="https://player.bilibili.com/player.html?aid=83222520&bvid=BV1rJ411n7ri&autoplay=0"
         allowFullScreen
-        className="h-screen w-full p-10"
+        className="h-full w-full"
       ></iframe>
     </div>
   );

@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Frame from "./components/Frame";
 import { useGame } from "./hooks/useGame";
 
@@ -15,7 +16,7 @@ function App() {
   } = useGame();
 
   return (
-    <div className="py-6">
+    <div className="min-w-[64rem] py-6">
       <div className="min-h-screen">
         <div className="flex justify-center">
           <div className="flex items-center gap-x-2">
@@ -49,6 +50,7 @@ function App() {
             </label>
           </div>
         </div>
+
         <div
           className={`mx-auto flex ${
             size === 16 ? "w-[32rem]" : size === 32 ? "w-[48rem]" : "w-[64rem]"
@@ -65,6 +67,8 @@ function App() {
             </div>
           ))}
         </div>
+
+        <Footer />
       </div>
 
       <Frame />
