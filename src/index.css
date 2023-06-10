@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .btn {
-    @apply border px-2 rounded bg-blue-400 active:scale-95 active:opacity-95 disabled:bg-gray-400;
+    @apply border px-2 rounded bg-blue-400
+    active:enabled:scale-95 active:enabled:opacity-95
+  disabled:bg-gray-400;
   }
 }
