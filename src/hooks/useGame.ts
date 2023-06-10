@@ -38,7 +38,8 @@ const useGame = () => {
   const handleClick = (i: number) => {
     setBoard((prev) => {
       const next = [...prev];
-      next[i] = 1;
+      if (next[i] === 0) next[i] = 1;
+      else next[i] = 0;
       return next;
     });
   };
