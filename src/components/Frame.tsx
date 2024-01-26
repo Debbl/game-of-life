@@ -4,7 +4,7 @@ function Frame() {
       <iframe
         src="https://player.bilibili.com/player.html?aid=83222520&bvid=BV1rJ411n7ri&autoplay=0"
         allowFullScreen
-        className="h-full w-full"
+        className="size-full"
       ></iframe>
     </div>
   );

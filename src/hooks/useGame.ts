@@ -10,7 +10,7 @@ function useGame() {
   const [size, setSize] = useLocalStorageState<TSize>("size", 16);
   const [board, setBoard] = useLocalStorageState(
     "board",
-    initPattern as any as TBoard
+    initPattern as any as TBoard,
   );
   const [isStarting, setIsStarting] = useLocalStorageState("isStarting", true);
   const intervalID = useRef<number>();
@@ -18,6 +18,7 @@ function useGame() {
   const updateBoard = useCallback(() => {
     setBoard((prevBoard) => {
       const nextBoard = [...prevBoard];
+
       prevBoard.forEach((b, i) => {
         const count = getAdjoinCount(i, prevBoard, size);
         if (b === 0 && count === 3) {
@@ -29,6 +30,7 @@ function useGame() {
       return nextBoard;
     });
   }, [setBoard, size]);
+
   const handleClick = (i: number) => {
     setBoard((prev) => {
       const next = [...prev];
@@ -37,22 +39,27 @@ function useGame() {
       return next;
     });
   };
+
   const handleStart = () => {
     setIsStarting(true);
   };
+
   const handleStop = () => {
     setIsStarting(false);
   };
+
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = +e.target.value as any as TSize;
     setSize(value);
     setBoard(Array.from({ length: value * value }).fill(0) as TBoard);
     handleStop();
   };
+
   const handleReset = () => {
     handleStop();
     setBoard(Array.from({ length: size * size }).fill(0) as TBoard);
   };
+
   const handleInit = () => {
     if (size === 16) {
       handleStop();

@@ -64,7 +64,7 @@ function App() {
             <div key={i} className="flex">
               <button
                 className={`border ${
-                  size === 16 ? "h-8 w-8" : size === 32 ? "h-6 w-6" : "h-4 w-4"
+                  size === 16 ? "size-8" : size === 32 ? "size-6" : "size-4"
                 } ${b === 1 && "bg-black"}`}
                 onClick={() => handleClick(i)}
               ></button>
