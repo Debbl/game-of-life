@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "packManger": "pnpm@9.1.4",
   "author": "Debbl <me@aiwan.run>(https://github.com/Debbl)",
   "scripts": {
     "dev": "vite",
@@ -12,26 +13,23 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.31",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.4.1"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
-    "@debbl/eslint-config": "^3.0.4",
-    "@debbl/eslint-config-prettier": "^0.0.45",
-    "@debbl/eslint-config-react": "^0.0.45",
-    "@debbl/eslint-config-tailwindcss": "^0.0.45",
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "typescript": "^5.0.2",
-    "vite": "^4.5.3"
+    "@debbl/eslint-config": "^3.2.4",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12"
   }
 }

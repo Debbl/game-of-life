@@ -18,8 +18,8 @@
     "noUnusedParameters": true,
     "noEmit": true,
     "isolatedModules": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src"],
+  "include": ["src"]
 }
