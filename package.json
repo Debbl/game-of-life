@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packManger": "pnpm@9.1.4",
+  "packageManger": "pnpm@9.1.4",
   "author": "Debbl <me@aiwan.run>(https://github.com/Debbl)",
   "scripts": {
     "dev": "vite",
